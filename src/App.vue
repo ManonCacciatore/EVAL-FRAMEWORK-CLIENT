@@ -1,11 +1,19 @@
-<script setup></script>
+<script setup>
+  import AppHeader from './components/AppHeader.vue';
+  import Catalog from './components/catalog/Catalog.vue';
+  import Cart from './components/cart/Cart.vue';
+  import AppFooter from './components/AppFooter.vue';
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+
+  <AppHeader />
+  <main class="container mx-auto py-8 px-4 flex flex-wrap">
+    <Catalog />
+    <Cart />
+  </main>
+  <AppFooter />
+
 </template>
 
 <style scoped></style>
