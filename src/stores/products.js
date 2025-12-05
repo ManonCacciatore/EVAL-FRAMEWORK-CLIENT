@@ -8,8 +8,9 @@ const init = async (apiURL) => {
     products.splice(products.length, 0, ...(await DB.findAll())) ;
 }
 
-const getOneById = async (id) => {
-    products.splice(products.findIndex((todo) => todo.id === id), 1);
+const getOneById = (id) => {
+    const product = products.find((p) => p.id === id)
+    return product
   }
 
 export const productsStore = reactive ({
