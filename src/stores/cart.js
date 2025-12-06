@@ -1,7 +1,8 @@
 
 import { reactive, ref, computed } from "vue";
-import DB from "@/services/DB";
 import { DELIVERY_OPTIONS } from "@/constants";
+import { TVA } from "@/constants";
+import { productsStore } from "./products";
 
 const cart = reactive([]);
 const selectedDeliveryId = ref("standard");
@@ -39,12 +40,25 @@ const deliveryPrice = computed(() => {
 })
 
 
-// Calcul du prix total des produits
-// Calcul de la TVA
+const subTotal = computed(() => {
+  return cart
+    .reduce((sum, ref) => {
+      const product = productsStore.getOneById(ref.id);
+      if (!product) return sum;
+      return sum + product.price * ref.quantity;
+    }, 0)
+    .toFixed(2);
+})
 
+const tvaPrice = computed(() => {
+  return (Number(subTotal.value) * (TVA / 100)).toFixed(2);
+})
 
-
-
+const totalPrice = computed(() => {
+  return (
+    Number(subTotal.value) + Number(tvaPrice.value) + Number(deliveryPrice.value)
+  ).toFixed(2);
+})
 
 export const cartStore = reactive ({
     cart,
@@ -52,5 +66,8 @@ export const cartStore = reactive ({
     addReference,
     setReferenceQuantity,
     deleteOneById,
-    deliveryPrice
+    deliveryPrice,
+    subTotal,
+    tvaPrice,
+    totalPrice
 });
