@@ -2,7 +2,7 @@
 import { reactive, ref, computed } from "vue";
 import { DELIVERY_OPTIONS } from "@/constants";
 import { TVA } from "@/constants";
-import { productsStore } from "./products";
+import { productsStore } from "@/stores/products";
 
 const cart = reactive([]);
 const selectedDeliveryId = ref("standard");
@@ -35,7 +35,7 @@ const deleteOneById = (referenceId) =>  {
 }
 
 const deliveryPrice = computed(() => {
-   const option = DELIVERY_OPTIONS.find((o) => o.id === selectedDeliveryId);
+   const option = DELIVERY_OPTIONS.find((o) => o.id === selectedDeliveryId.value);
    return option ? option.price : 0
 })
 
@@ -44,7 +44,6 @@ const subTotal = computed(() => {
   return cart
     .reduce((sum, ref) => {
       const product = productsStore.getOneById(ref.id);
-      if (!product) return sum;
       return sum + product.price * ref.quantity;
     }, 0)
     .toFixed(2);
