@@ -1,5 +1,7 @@
 <script setup>
 
+import MyButton from '../ui/MyButton.vue';
+
 const props = defineProps({
   product: { type: Object, required: true },
 });
@@ -17,10 +19,9 @@ const onAddItem = () => {
     <div class="p-4">
       <h2 class="font-bold text-lg mb-2">{{ product.name }}</h2>
       <p class="text-gray-700">{{ product.price }} euros</p>
-      <button class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
-        @click="onAddItem">
+      <MyButton @click="onAddItem">
         Ajouter
-      </button>
+      </MyButton>
     </div>
   </article>
 </template>

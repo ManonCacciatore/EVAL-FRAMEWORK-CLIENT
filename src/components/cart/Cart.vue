@@ -2,6 +2,7 @@
 import CartItem from './CartItem.vue';
 import { cartStore } from '@/stores/cart';
 import { DELIVERY_OPTIONS } from '@/constants';
+import MyButton from '../ui/MyButton.vue';
 
 </script>
 <template>
@@ -34,9 +35,9 @@ import { DELIVERY_OPTIONS } from '@/constants';
             <span><strong>Total Général:</strong></span>
             <span>{{ cartStore.totalPrice }}</span>
           </div>
-          <button class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cart-btn">
+          <MyButton>
             Procéder au paiement
-          </button>
+          </MyButton>
         </div>
       </div>
     </div>
